@@ -1,9 +1,11 @@
-#!/bin/bash
+#!/bin/bash +x
 
-# Starts with e.g. JRA-1234
-PATTERN="^[[:upper:]]{3}-\d"
+# Starts with e.g. "JRA-1234 "
+PATTERN="^[A-Z]{3}-[\d]{1,6}\s"
 
-MATCHES=$(grep -G $PATTERN "$1")
+MATCHES=$(grep -E $PATTERN "$1")
+
+echo Matches: "$MATCHES"
 
 if ("$MATCHES") then
 	exit 0
@@ -11,4 +13,3 @@ else
 	echo "Commit message does not match $PATTERN"
 	exit 1
 fi
-
