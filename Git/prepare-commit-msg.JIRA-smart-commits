@@ -1,15 +1,21 @@
-#!/bin/bash +x
+#!/bin/bash 
 
 # Starts with e.g. "JRA-1234 "
-PATTERN="^[A-Z]{3}-[\d]{1,6}\s"
+PATTERN="^[A-Z]{3}-[0-9]{1,6}\s"
 
-MATCHES=$(grep -E $PATTERN "$1")
+# Filename containing commit message is provided by Git
+FILE=$1
 
-echo Matches: "$MATCHES"
+echo "File: $FILE"
 
-if ("$MATCHES") then
-	exit 0
+# Any match will suffice
+MATCHES=`grep -E $PATTERN $FILE`
+
+# Just test return code
+if [ $? = 0  ] ; then
+	# echo Matches: "$MATCHES"
+	exit 0;
 else
-	echo "Commit message does not match $PATTERN"
-	exit 1
+	echo "Commit message does not match $PATTERN : "
+	exit 1;
 fi
