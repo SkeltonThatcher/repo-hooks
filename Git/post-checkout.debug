@@ -1,10 +1,15 @@
 #!/bin/bash                                                                      
-# From @givanse
-# http://stackoverflow.com/questions/1011557/is-there-a-way-to-trigger-a-hook-after-a-new-branch-has-been-checked-out-in-git
+# Original author: @givanse
 
 set -e                                                                           
 
 printf '\npost-checkout hook\n\n'                                                
+
+# Uncomment these next lines for additional debuggability
+
+# echo 'Previous: ' $1
+# echo 'New: ' $2
+# echo ''
 
 prevHEAD=$1                                                                      
 newHEAD=$2                                                                       
